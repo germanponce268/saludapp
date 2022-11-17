@@ -2,10 +2,16 @@ package com.saludapp.controllers;
 import com.saludapp.repositorios.PacienteRepository;
 import com.saludapp.entidades.Paciente;
 import com.saludapp.servicios.PacienteService;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/servicio")
@@ -13,16 +19,13 @@ public class PacienteContoller {
 	
 	@Autowired
 	private PacienteService pService;
-	
-	@GetMapping("/savePaciente")
-	public void save(Paciente paciente) {
-		Paciente pacienteAux = new Paciente();
-		pacienteAux.setNombre("Barulo");
-		pacienteAux.setApellido("Costar");
-		pacienteAux.setDni(27845989L);
-		pacienteAux.setId(1);
-		paciente = pacienteAux;
-		System.out.println(paciente.getNombre());
+	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, 
+					produces=MediaType.APPLICATION_JSON_VALUE,
+					value="/savePaciente")
+	public ResponseEntity save(@RequestBody Paciente paciente) {
+		System.out.println(paciente);
+		//pService.savePaciente(paciente);
 		pService.savePaciente(paciente);
+		return ResponseEntity.ok(HttpStatus.OK);
 	}
 }

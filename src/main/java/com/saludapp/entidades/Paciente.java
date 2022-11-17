@@ -43,6 +43,10 @@ public class Paciente {
 	public void setDni(Long dni) {
 		this.dni = dni;
 	}
+	@Override
+	public String toString() {
+		return "Paciente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+	}
 	
 	
 }
