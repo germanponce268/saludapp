@@ -13,6 +13,7 @@ public class Paciente {
 	
 	@Id()
 	@Column(name="paciente_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String apellido;
